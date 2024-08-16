@@ -12,6 +12,9 @@ const Login = () => {
   const handlesignup = () => {
     navigate("/");
   };
+  const handlesigin = () => {
+    navigate("/homepage");
+  };
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -40,6 +43,7 @@ const Login = () => {
       if (response.status === 200) {
         setSuccess("Login successful");
         setError("");
+        navigate("/homepage");
       }
     } catch (error) {
       setError(error.response?.data?.message || "Something went wrong");

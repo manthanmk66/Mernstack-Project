@@ -43,7 +43,7 @@ const Register = () => {
       if (response.status === 201) {
         setSuccess("User registered successfully");
         setError("");
-       
+
         setFormData({
           fullname: "",
           emailid: "",
