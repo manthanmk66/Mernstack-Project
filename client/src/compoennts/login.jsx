@@ -9,10 +9,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  const handlesignup = () => {
-    navigate("/");
-  };
-  const handlesigin = () => {
+  const handlesignin = () => {
     navigate("/homepage");
   };
 
@@ -41,8 +38,10 @@ const Login = () => {
       );
 
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
         setSuccess("Login successful");
         setError("");
+        console.log("Success")
         navigate("/homepage");
       }
     } catch (error) {
@@ -105,7 +104,7 @@ const Login = () => {
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don't have an account yet?{" "}
                 <button
-                  onClick={handlesignup}
+                  onClick={handlesignin}
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Register here
