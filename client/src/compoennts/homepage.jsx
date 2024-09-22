@@ -3,16 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { SiGmail, SiLinkedin } from "react-icons/si";
 import { RiTwitterXFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import axios from "axios";
 
 const HomePage = () => {
   const [homePageData, setHomePageData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({
+    title: " ",
+    description: " ",
+  });
   const navigate = useNavigate(); // Used to redirect the user
+
+  const addTodo = async () => {
+    axios.post("http://localhost:5000/api/auth/addtodo");
+  };
 
   // Function to fetch homepage data
   const fetchHomePage = async () => {
     const token = localStorage.getItem("token"); // Get token from localStorage
-    
 
     if (!token) {
       // Redirect to login page if no token is found
@@ -128,6 +136,30 @@ const HomePage = () => {
           </div>
         </div>
       </main>
+
+      <div className="flex justify-center p-2">
+        <input
+          type="text"
+          placeholder="Title"
+          className="p-2 border border-gray-300 rounded "
+          id="title"
+          onChange={(e) => {
+            setData(e.target.value);
+          }}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          className="p-2 border border-gray-300 rounded "
+          id="title"
+          onChange={(e) => {
+            setData(e.target.value);
+          }}
+          required
+        />
+        <button className="bg-orange-200">Add Todo</button>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const Login = require("../model/loginmodel");
 const jwt = require("jsonwebtoken");
+const Todo = require("../model/ToDoModel");
 
 exports.registerUser = async (req, res) => {
   const { fullname, emailid, mobile, password } = req.body;
@@ -57,3 +58,24 @@ exports.loginUser = async (req, res) => {
     console.log(error);
   }
 };
+
+
+//for todo
+
+exports.addTodos = async (req, res) => { 
+  const { userId, title, description } = req.body;
+  console.log("testing addTodos"); 
+  try{
+    const newTodo=new Todo({
+      userId,
+      title,
+      description,
+    })
+
+    await newTodo.save();
+    res.status(201).json({message: "Todo added successfully", newTodo});
+  }
+  catch(error){
+    res.status(500).json({message: error.message});
+  }
+}
